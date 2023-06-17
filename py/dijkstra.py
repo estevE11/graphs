@@ -31,23 +31,9 @@ def solve_dijkstra(start, target, graph):
         pq.pop(0) # delete the first node of the list
         visited.append(curr.val) # add the current node to visited
         add_neigbours(pq, curr, graph, visited) # add the neighbours to pq
-        pq = sort(pq) # sort the pq by cost
+        pq.sort(key=lambda x: x.cost)
 
     return pq[0]
-
-# don't look at this please
-def sort(pq):
-    res = [pq[0]]
-    for i in range(1, len(pq)):
-        inserted = False
-        for j in range(len(res)):
-            if pq[i].cost < res[j].cost:
-                res.insert(j, pq[i])
-                inserted = True
-                break
-        if not inserted:
-            res.append(pq[i])
-    return res 
 
 def add_neigbours(pq, node, graph, visited):
     for nd in graph[node.val]: # loop all the neighbours of the node
