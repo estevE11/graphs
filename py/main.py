@@ -20,7 +20,7 @@ def main():
 
     g = test_graph2
     for i in range(1, len(g)):
-        path = dijkstra.solve_dijkstra(0, i, g)
+        path = dijkstra.solve(0, i, g)
         print(path.combine_trace(), path.cost)
 
 if __name__ == "__main__":

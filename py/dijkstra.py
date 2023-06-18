@@ -1,4 +1,4 @@
-def solve_dijkstra(start, target, graph):
+def solve(start, target, graph):
     pq = [Node(start, 0, [])]
     visited = []
     while pq[0].val != target:
