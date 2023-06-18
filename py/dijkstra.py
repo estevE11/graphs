@@ -5,7 +5,6 @@ def solve(start, target, graph):
         visited.append(pq[0].val)
         add_neigbours(pq, pq.pop(0), graph, visited)
         pq.sort(key=lambda x: x.cost)
-
     return pq[0]
 
 def add_neigbours(pq, node, graph, visited):
