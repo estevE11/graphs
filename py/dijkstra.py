@@ -22,24 +22,19 @@ def main():
         print(path.combine_trace(), path.cost)
 
 def solve_dijkstra(start, target, graph):
-    # init the pq with start node with 0 cost and empty trace
     pq = [Node(start, 0, [])]
     visited = []
-
-    while pq[0].val != target: # do while the fist element of the list is not the target
-        curr = pq[0] # get the first node of the list
-        pq.pop(0) # delete the first node of the list
-        visited.append(curr.val) # add the current node to visited
-        add_neigbours(pq, curr, graph, visited) # add the neighbours to pq
+    while pq[0].val != target:
+        visited.append(pq[0].val)
+        add_neigbours(pq, pq.pop(0), graph, visited)
         pq.sort(key=lambda x: x.cost)
 
     return pq[0]
 
 def add_neigbours(pq, node, graph, visited):
-    for nd in graph[node.val]: # loop all the neighbours of the node
-        if nd[0] not in visited: # only add if it is not visited
-            # append a new node with a combined cost and the parent's trace
-            pq.append(Node(nd[0], node.cost+nd[1], node.combine_trace()))
+    for nd in graph[node.val]:
+        if nd[0] not in visited:
+            pq.append(Node(nd[0], node.cost + nd[1], node.combine_trace()))
     return pq
 
 class Node():
@@ -48,7 +43,6 @@ class Node():
         self.cost = cost
         self.trace = trace
 
-    # returns a list with it's trace and itself
     def combine_trace(self):
         new_trace = self.trace.copy()
         new_trace.append(self.val)
